@@ -108,6 +108,29 @@ var moves = {
     }
   },
 
+  mkoczka: function(gameData, helpers) {
+    var myHero = gameData.activeHero;
+
+    //Get stats on the nearest health well
+    var healthWellStats = helpers.findNearestObjectDirectionAndDistance(gameData.board, myHero, function(boardTile) {
+      if (boardTile.type === 'HealthWell') {
+        return true;
+      }
+    });
+    var distanceToHealthWell = healthWellStats.distance;
+    var directionToHealthWell = healthWellStats.direction;
+
+    if (distanceToHealthWell === 1 && myHero.health !== 100) {
+        return directionToHealthWell;
+    }
+
+    if (myHero.health < 30) {
+      return distanceToHealthWell;
+    } else {
+      return helpers.findNearestEnemy(gameData);
+    }
+  },
+
   // The "Careful Assassin"
   // This hero will attempt to kill the closest weaker enemy hero.
   carefulAssassin : function(gameData, helpers) {
@@ -180,7 +203,7 @@ var moves = {
  };
 
 //  Set our heros strategy
-var  move =  moves.unwiseAssassin;
+var  move =  moves.mkoczka;
 
 // Export the move function here
 module.exports = move;
