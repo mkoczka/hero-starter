@@ -109,6 +109,7 @@ var moves = {
   },
 
   mkoczka: function(gameData, helpers) {
+    // TODO: run away if two or more enemies are around me
     var myHero = gameData.activeHero;
 
     //Get stats on the nearest health well
