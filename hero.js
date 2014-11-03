@@ -125,7 +125,7 @@ var moves = {
         return directionToHealthWell;
     }
 
-    if (myHero.health < 30) {
+    if (myHero.health < 50) {
       return distanceToHealthWell;
     } else {
       return helpers.findNearestEnemy(gameData);
